@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setup3dLogo();
 
     const animatedElements = document.querySelectorAll('.fade-in-section, .fade-in-card');
+    const sectionHeadings = document.querySelectorAll('.section-heading');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -102,6 +103,16 @@ document.addEventListener('DOMContentLoaded', function() {
         threshold: 0.1
     });
     animatedElements.forEach(el => observer.observe(el));
+    sectionHeadings.forEach(el => observer.observe(el));
+
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
 
     function setupTestimonialCarousel() {
         const container = document.querySelector('.testimonial-carousel-container');
@@ -170,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const navLinks = document.querySelectorAll('.nav-link');
-    const navbar = document.querySelector('.navbar');
+    // const navbar = document.querySelector('.navbar');
     const navbarCollapse = document.getElementById('navbarNav');
     const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
 
