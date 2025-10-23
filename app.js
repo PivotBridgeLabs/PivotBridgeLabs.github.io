@@ -35,7 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 800);
 
     setTimeout(() => {
-        document.querySelector('.btn-cta').classList.add('animate-in');
+        const ctaGroup = document.querySelector('.cta-button-group');
+        if (ctaGroup) ctaGroup.classList.add('animate-in');
+        const btnCta = document.querySelector('.btn-cta');
+        if (btnCta) btnCta.classList.add('animate-in');
     }, 1200);
 
     if (!isMobile) {
