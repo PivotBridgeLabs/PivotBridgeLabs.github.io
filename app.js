@@ -18,7 +18,9 @@ function animateLogoText(element, text, callback) {
         }
     }, 60);
 }
-
+setTimeout(() => {
+    document.querySelector('.tagline').classList.add('animate-in');
+}, 200);
 document.addEventListener('DOMContentLoaded', function() {
     const isMobile = window.innerWidth <= 768;
 
@@ -32,14 +34,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     setTimeout(() => {
         document.querySelector('.elevator-pitch').classList.add('animate-in');
-    }, 800);
+    }, 600);
+
+    setTimeout(() => {
+        document.querySelector('.prototype-offer').classList.add('animate-in');
+    }, 1000);
 
     setTimeout(() => {
         const ctaGroup = document.querySelector('.cta-button-group');
         if (ctaGroup) ctaGroup.classList.add('animate-in');
-        const btnCta = document.querySelector('.btn-cta');
-        if (btnCta) btnCta.classList.add('animate-in');
-    }, 1200);
+    }, 1400);
 
     if (!isMobile) {
         const cursorDot = document.querySelector('.cursor-dot');
@@ -57,16 +61,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    const aboutVisual = document.querySelector('.about-visual i');
+    const aboutIconContainer = document.querySelector('.about-icon-container');
     const aboutSection = document.querySelector('#about');
     if (!isMobile) {
         window.addEventListener('scroll', () => {
-            if (aboutVisual && aboutSection) {
+            if (aboutIconContainer && aboutSection) {
                 const sectionTop = aboutSection.offsetTop;
                 const scrollPosition = window.scrollY;
                 const elementScroll = scrollPosition - sectionTop;
                 if (elementScroll > -window.innerHeight && elementScroll < aboutSection.offsetHeight) {
-                    aboutVisual.style.transform = `translateY(${elementScroll * 0.2}px)`;
+                    aboutIconContainer.style.transform = `translateY(${elementScroll * 0.2}px)`;
                 }
             }
         });
@@ -74,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function setup3dLogo() {
         const container = document.querySelector('.hero-logo-container');
+        if (!container) return;
         const logo = container.querySelector('.hero-logo');
         if (isMobile) return;
 
@@ -107,6 +112,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     animatedElements.forEach(el => observer.observe(el));
     sectionHeadings.forEach(el => observer.observe(el));
+
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
 
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
@@ -184,7 +194,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const navLinks = document.querySelectorAll('.nav-link');
-    // const navbar = document.querySelector('.navbar');
     const navbarCollapse = document.getElementById('navbarNav');
     const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
 

@@ -302,7 +302,7 @@ h6 {
 }
 
 .hero-logo {
-    max-width: 300px;
+    max-width: 250px;
     transition: transform 0.2s ease-out;
     filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
     animation: logoFloat 4s ease-in-out infinite;
@@ -351,7 +351,68 @@ h6 {
     z-index: 2;
 }
 
-.hero-section .tagline span {
+/* New Tagline Flipper Animation */
+.hero-section .tagline {
+    font-size: 4.3rem;
+    color: var(--graphite);
+    line-height: 1.2;
+    text-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 2;
+}
+
+.tagline-flipper {
+    height: 1.2em; /* This should match the h1 line-height */
+    line-height: 1.2em;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.tagline-animator {
+    animation: flip-show 6s linear infinite;
+}
+
+.tagline-animator > div {
+    display: block;
+    padding: 0 1rem;
+    height: 1.2em; /* Match container height */
+    line-height: 1.2em; /* Center text vertically */
+    margin-bottom: 0;
+}
+
+.tagline-animator .phrase-1 {
+    background: var(--teal);
+    color: var(--ivory);
+}
+.tagline-animator .phrase-2 {
+    background: var(--amber);
+    color: var(--graphite);
+}
+.tagline-animator .phrase-3 {
+    background: var(--aqua);
+    color: white;
+}
+
+@keyframes flip-show {
+    0%    { margin-top: 0em; }
+    5%    { margin-top: 0em; }  /* Show item 1 */
+    33%   { margin-top: 0em; }  /* Hold item 1 */
+    38%   { margin-top: -1.2em; } /* Show item 2 */
+    66%   { margin-top: -1.2em; } /* Hold item 2 */
+    71%   { margin-top: -2.4em; } /* Show item 3 */
+    95%   { margin-top: -2.4em; } /* Hold item 3 */
+    100%  { margin-top: 0em; } /* Reset */
+}
+
+/* Adjust font size for mobile */
+@media (max-width: 768px) {
+    .hero-section .tagline {
+        font-size: 1.2rem;
+        text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.6);
+    }
+}
+/* .hero-section .tagline span {
     display: inline-block;
     margin: 0 0.25em;
     opacity: 0;
@@ -360,13 +421,13 @@ h6 {
 }
 
 .hero-section .tagline.animate-in span:nth-child(1) { transition-delay: 0.2s; }
-.hero-section .tagline.animate-in span:nth-child(2) { transition-delay: 0.6s; }
-.hero-section .tagline.animate-in span:nth-child(3) { transition-delay: 1.0s; }
+.hero-section .tagline.animate-in span:nth-child(2) { transition-delay: 0.4s; }
+.hero-section .tagline.animate-in span:nth-child(3) { transition-delay: 0.6s; }
 
 .hero-section .tagline.animate-in span {
     opacity: 1;
     transform: translateY(0) scale(1);
-}
+} */
 
 .hero-section .elevator-pitch {
     position: relative;
@@ -383,7 +444,42 @@ h6 {
 .hero-section .elevator-pitch.animate-in span {
     opacity: 1;
     transform: translateY(0) scale(1);
-    transition-delay: 1.4s;
+}
+
+.prototype-offer {
+    font-family: var(--font-subheading);
+    color: var(--charcoal);
+    max-width: 600px;
+    margin: 0.5rem auto 2rem;
+    font-size: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.prototype-offer span, .prototype-offer i {
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.prototype-offer.animate-in span,
+.prototype-offer.animate-in i {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.prototype-offer i {
+    color: var(--teal);
+    font-size: 1.1rem;
+    cursor: none; 
+    transition: all 0.3s ease;
+}
+
+.prototype-offer i:hover {
+    color: var(--aqua);
+    transform: scale(1.2);
 }
 
 .hero-section .btn-cta {
@@ -401,14 +497,13 @@ h6 {
 .hero-section .btn-cta.animate-in span {
     opacity: 1;
     transform: translateY(0) scale(1);
-    transition-delay: 1.8s;
 }
 
 .hero-section .elevator-pitch {
     font-family: var(--font-subheading);
     color: var(--charcoal);
     max-width: 600px;
-    margin: 1rem auto 2rem;
+    margin: 1rem auto 1rem;
 }
 
 .about-points {
@@ -438,20 +533,50 @@ h6 {
     font-size: 0.95rem;
 }
 
+/* Find and REPLACE your existing .about-visual styles with these */
 .about-visual {
     position: relative;
-    transition: transform 0.2s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
 }
 
-.about-visual i {
+.about-icon-container {
+    width: 280px;
+    height: 280px;
+    background: linear-gradient(45deg, var(--amber), var(--gold));
+    border-radius: 65% 35% 55% 45% / 55% 45% 55% 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    animation: blobAnimate 8s ease-in-out infinite;
+    transition: all 0.4s ease, transform 0.2s ease-out; /* Added transform for JS parallax */
+}
+
+@keyframes blobAnimate {
+    0%, 100% {
+        border-radius: 65% 35% 55% 45% / 55% 45% 55% 45% 15%;
+    }
+    50% {
+        border-radius: 35% 65% 45% 55% / 45% 55% 45% 55%;
+    }
+}
+
+.about-icon-container i {
+    font-size: 6rem;
+    color: var(--graphite);
     transition: all 0.3s ease;
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+}
+
+.about-visual:hover .about-icon-container {
+     box-shadow: 0 20px 50px rgba(0,0,0,0.2);
 }
 
 .about-visual:hover i {
-    transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 15px 30px rgba(0, 128, 128, 0.3));
-    color: var(--teal) !important;
+     transform: rotate(15deg);
+     color: var(--teal);
 }
 
 .btn-cta {
@@ -516,7 +641,6 @@ h6 {
 .cta-button-group.animate-in {
     opacity: 1;
     transform: translateY(0) scale(1);
-    transition-delay: 1.8s;
 }
 
 .cta-button-group:hover {
@@ -807,8 +931,8 @@ section {
 .testimonial-text {
     font-family: var(--font-subheading);
     font-size: 1.2rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    margin-bottom: 1.2rem;
     font-style: italic;
 }
 
@@ -994,6 +1118,22 @@ section {
 }
 
 @media (max-width: 991.98px) {
+    .testimonial-text{
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 1.0rem;
+        font-style: italic;
+    }
+
+    .testimonial-author{
+        font-size: 0.8rem;
+    }
+    .testimonial-author a{
+        font-size: 0.8rem;
+        color: var(--teal);
+        text-decoration: none;
+        font-weight: 700;
+    }
     .navbar-collapse {
         background-color: var(--ivory);
         padding: 1rem;
@@ -1017,10 +1157,10 @@ section {
     .hero-section .tagline {
         font-size: 2.2rem;
     }
-    .hero-section .tagline span {
+    /* .hero-section .tagline span {
         display: block;
         margin: 0;
-    }
+    } */
     .cta-button-group {
         flex-direction: row;
         border-radius: 25px;
@@ -1046,6 +1186,11 @@ section {
     }
     .hero-section .elevator-pitch {
         font-size: 1rem;
+        margin: 0.5rem auto 1rem;
+        max-width: 90%;
+    }
+    .prototype-offer {
+        font-size: 0.9rem;
         margin: 0.5rem auto 1.5rem;
         max-width: 90%;
     }
