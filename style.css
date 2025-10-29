@@ -13,6 +13,8 @@
     --ivory: #FFF8E7;
     --graphite: #1C1C1C;
     --gold: #FFD700;
+    --coral: #FF6B6B;
+    --coral-light: #FF8559;
     --font-heading: 'JetBrains Mono', monospace;
     --font-subheading: 'IBM Plex Mono', monospace;
     --font-body: 'Recursive', monospace;
@@ -61,7 +63,7 @@ button,
     pointer-events: none;
     z-index: 9999;
     transition: transform 0.2s ease-out, width 0.3s, height 0.3s, opacity 0.3s, border-color 0.3s;
-    box-shadow: 0 0 15px rgba(0, 128, 128, 0.3);
+    box-shadow: 0 0 15px rgba(0, 128, 128, 0.55);
     animation: cursorPulse 2s ease-in-out infinite;
 }
 
@@ -261,7 +263,7 @@ h6 {
 }
 
 .hero-section {
-    background: linear-gradient(135deg, var(--amber) 0%, #FFD700 50%, var(--amber) 100%);
+    background: linear-gradient(135deg, var(--amber) 0%,var(--coral-light) 50%, var(--amber) 100%);
     background-size: 200% 200%;
     height: 93vh;
     display: flex;
@@ -270,7 +272,7 @@ h6 {
     padding: 2rem;
     position: relative;
     overflow: hidden;
-    animation: heroGradient 8s ease infinite;
+    animation: heroGradient 6s ease infinite;
 }
 
 @keyframes heroGradient {
@@ -675,7 +677,7 @@ h6 {
 .about-icon-container {
     width: 280px;
     height: 280px;
-    background: linear-gradient(45deg, var(--amber), var(--gold));
+    background: linear-gradient(45deg, var(--amber), var(--coral));
     border-radius: 65% 35% 55% 45% / 55% 45% 55% 45%;
     display: flex;
     align-items: center;
